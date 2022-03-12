@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>preactica 4 </title>
+</head>
+<body>
+    <button onclick="obtieneubicacion()">obtener obicacion </button>
+    <div id="mapa">
+        <img id="imagenmapa" src="" alt="imagen de mapa">
+
+    </div>
+    <p id="alerta">
+
+    </p>
+    <script>
+        var mapa = document.getElementById ("mapa");
+        function getLocation() {
+            if(navigator.geolocation){
+                navigator.geolocation.getCurrentPosition(muestrapociocion)
+            }
+            else
+            {
+                var alerta = document.getElementById("alert")
+                alerta.innerHTML = "ponga permitir mamahuevo"
+
+            }
+        }
+        function muestrapociocion(posicion){
+            var coordenadas = posicion.coords.latitude+","+ posicion.coords.lomgitude;
+            var imagenmapa = document.getElementById("imagenmapa");
+            imagenmapa.src = "http://maps.googlepis.com/map/api/startcmap?center=${cordenad}2js?key=AIzaSyCMrQgga-C5zCuZLTVk2MPVzX7naqKZXZU&callback=iniciaMapa"
+            //src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMrQgga-C5zCuZLTVk2MPVzX7naqKZXZU&callback=iniciaMapa"
+        }
+    </script>
+
+
+</body>
+</html>
