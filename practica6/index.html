@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Práctica 6</title>
+    <style>
+        #map {
+            height: 100%;
+        }
+
+        html,body {
+            height: 100%;
+            margin:0;
+            padding: 0;
+        }
+    </style>
+
+</head>
+<body>
+    
+    <div id="map"></div>
+    <script>
+        var map;
+        var coordenadas = {
+             lat: 0,
+             lng: 0
+        };
+        var propiedades = {
+            center: coordenadas,
+            zoom: 20
+        }
+
+
+        function iniciaMapa() {
+            map = new google.maps.Map(document.getElementById("map"), propiedades);
+            var icono = {
+                url : "https://media.giphy.com/media/1ZweHMlSaxcc32mSSu/giphy.gif",
+                scaledSize: new google.maps.Size(50,50),
+                origin: new google.maps.Point(0,0),
+                anchor: new google.maps.Point(0,0)
+            }
+            var marker = new google.maps.Marker({
+                position: coordenadas,
+                icon: icono,
+                map: map
+            });
+            if(navigator.geolocation){
+                setInterval( ()=> {
+                    moverPosicion();
+                },5000);
+            }
+            function moverPosicion() {
+                navigator.geolocation.getCurrentPosition( posicion =>{
+                    var pos = {
+                        lat: posicion.coords.latitude,
+                        lng: posicion.coords.longitude
+                    }
+                    console.table(pos);
+                    marker.setPosition(pos);
+                    map.panTo(pos);
+                    //map.setCenter(pos);
+                });
+            }
+        }
+
+
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=%41%49%7A%61%53%79%43%4D%72%51%67%67%61%2D%43%35%7A%43%75%5A%4C%54%56%6B%32%4D%50%56%7A%58%37%6E%61%71%4B%5A%58%5A%55&callback=%69%6E%69%63%69%61%4D%61%70%61" async defer></script>
+
+
+</body>
+</html>
